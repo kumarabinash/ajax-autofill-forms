@@ -2,7 +2,9 @@ window.onload = initAll;
 var xhr = false; //XMLHttpRequest Object
 var stateArray = new Array();
 
-document.onclick = dismissPopups;
+document.onclick = function(){
+	document.getElementById('stateSuggest').innerHTML = "";
+};
 
 function initAll(){
 	if(window.XMLHttpRequest){  
@@ -71,10 +73,5 @@ function searchStates(){
 function makeChoice(evt){
 	var thisDiv = (evt)? evt.target : window.event.srcElement;
 	document.getElementById('state').value = thisDiv.innerHTML;
-	document.getElementById('stateSuggest').innerHTML = "";
-}
-
-function dismissPopups(evt){
-	var thisbody = (evt)? evt.target : window.event.srcElement;
 	document.getElementById('stateSuggest').innerHTML = "";
 }
