@@ -1,6 +1,6 @@
 window.onload = initAll;
 var xhr = false; //XMLHttpRequest Object
-stateArray = new Array();
+var stateArray = new Array();
 
 function initAll(){
 	if(window.XMLHttpRequest){  
@@ -48,11 +48,12 @@ function searchStates(){
 		document.getElementById('stateSuggest').innerHTML = "";
 
 		for(var i=0; i<stateArray.length; i++){
-			var thisState = statesArray[i].nodeValue;
+			var thisState = stateArray[i].nodeValue;
+
 			if(thisState.toLowerCase().indexOf(str.toLowerCase()) == 0){
 				var tempDiv = document.createElement("div");
 				tempDiv.innerHTML = thisState;
-				tempDiv.onClick = makeChoice;
+				tempDiv.onclick = makeChoice;
 				tempDiv.className = "suggestions";
 				document.getElementById('stateSuggest').appendChild(tempDiv);
 			}

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
+<choices xml:lang="EN">
 	<state>
 		<label>Andhra Pradesh</label>
 		<value>AP</value>
@@ -111,3 +112,4 @@
 		<label>West Bengal</label>
 		<value>WB</value>
 	</state>
+</choices>
