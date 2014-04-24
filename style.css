@@ -1,6 +1,11 @@
 body{
-	font-family: Helvetica, sans-serif;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 210;
 	padding: 20px;
+}
+
+h2{
+	font-weight: 400;
 }
 
 #state.error{
