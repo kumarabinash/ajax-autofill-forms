@@ -2,3 +2,22 @@ body{
 	font-family: Helvetica, sans-serif;
 	padding: 20px;
 }
+
+#state.error{
+	background-color: #FC0;
+}
+
+#stateSuggest {
+	position: absolute;
+}
+
+div.suggestions{
+	background-color: #fff;
+	padding: 2px 6px;
+	border: 1px solid #333;
+}
+
+div.suggestions:hover{
+	background-color: #69f;
+}
+

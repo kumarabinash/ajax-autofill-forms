@@ -30,8 +30,43 @@ function setStatesArray(){
 	if(xhr.readyState == 4){
 		if(xhr.status == 200){
 			if(xhr.responseXML){
-				var allStates = xhr.responseXML.getElementsByTagName('item');
+				var allStates = xhr.responseXML.getElementsByTagName('state');
+				for(var i=0; i<allStates.length; i++){
+					stateArray[i] = allStates[i].getElementsByTagName('label')[0].firstChild;
+				}
 			}
+		} else {
+			alert("There was problem with the request " + xhr.status);
 		}
 	}
+}
+
+function searchStates(){
+	var str = document.getElementById('state').value;
+	document.getElementById('state').className = "";
+	if(str != ""){
+		document.getElementById('stateSuggest').innerHTML = "";
+
+		for(var i=0; i<stateArray.length; i++){
+			var thisState = statesArray[i].nodeValue;
+			if(thisState.toLowerCase().indexOf(str.toLowerCase()) == 0){
+				var tempDiv = document.createElement("div");
+				tempDiv.innerHTML = thisState;
+				tempDiv.onClick = makeChoice;
+				tempDiv.className = "suggestions";
+				document.getElementById('stateSuggest').appendChild(tempDiv);
+			}
+		}
+
+		var foundState = document.getElementById('stateSuggest').childNodes.length;
+		if(foundState == 0){
+			document.getElementById('state').className = "error";
+		}
+	}
+}
+
+function makeChoice(evt){
+	var thisDiv = (evt)? evt.target : window.event.srcElement;
+	document.getElementById('state').value = thisDiv.innerHTML;
+	document.getElementById('stateSuggest').innerHTML = "";
 }
