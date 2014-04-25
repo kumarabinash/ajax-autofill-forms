@@ -12,8 +12,13 @@
 			<tr>
 				<td><label>State</label></td>
 				<td>
-					<input type="text" id="state" autocomplete="off" />
-					<div id="stateSuggest"> </div>
+					<input type="text" id="state" autocomplete="off" onkeyup="initAll(this);" />
+				</td>
+			</tr>
+			<tr>
+				<td><label>City</label></td>
+				<td>
+					<input type="text" id="city" autocomplete="off" onkeyup="initAll(this);" />
 				</td>
 			</tr>
 			<tr>
@@ -22,5 +27,6 @@
 			</tr>
 		</table>
 	</form>
+	<div id="stateSuggest"> </div>
 </body>
 </html>

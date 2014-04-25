@@ -1,12 +1,21 @@
-window.onload = initAll;
 var xhr = false; //XMLHttpRequest Object
-var stateArray = new Array();
+var dataArray = new Array();
+var url = "local.xml"; //CHANGE THIS TO YOUR DESIRED XML FILE AND POPULATE THE XML FILE
+var elementId;
 
 document.onclick = function(){
 	document.getElementById('stateSuggest').innerHTML = "";
 };
 
-function initAll(){
+
+function initAll(elid){
+	elementId = elid.id;
+	if(elementId == "state"){
+		url = elementId;		
+	} else {
+		var state = document.getElementById('state').value.toLowerCase();
+		url = state + "-" + elementId;
+	}
 	if(window.XMLHttpRequest){  
 		xhr = new XMLHttpRequest();
 	} else {
@@ -19,24 +28,24 @@ function initAll(){
 	}
 
 	if(xhr){
-		xhr.onreadystatechange = setStatesArray;
-		xhr.open("GET", "states.xml", true);
+		xhr.onreadystatechange = setDataArray;
+		xhr.open("GET", url, true);
 		xhr.send(null);
 	} else {
 		alert("Sorry, XMLHttpRequest couldn't be created. ");
 	}
 
-	document.getElementById('state').onkeyup = searchStates;
+	searchData();
 
 }
 
-function setStatesArray(){
+function setDataArray(){
 	if(xhr.readyState == 4){
 		if(xhr.status == 200){
 			if(xhr.responseXML){
-				var allStates = xhr.responseXML.getElementsByTagName('state');
-				for(var i=0; i<allStates.length; i++){
-					stateArray[i] = allStates[i].getElementsByTagName('label')[0].firstChild;
+				var allData = xhr.responseXML.getElementsByTagName(elementId);
+				for(var i=0; i<allData.length; i++){
+					dataArray[i] = allData[i].getElementsByTagName('label')[0].firstChild;
 				}
 			}
 		} else {
@@ -45,14 +54,14 @@ function setStatesArray(){
 	}
 }
 
-function searchStates(){
-	var str = document.getElementById('state').value;
-	document.getElementById('state').className = "";
+function searchData(){
+	var str = document.getElementById(elementId).value;
+	document.getElementById(elementId).className = "";
 	if(str != ""){
 		document.getElementById('stateSuggest').innerHTML = "";
 
-		for(var i=0; i<stateArray.length; i++){
-			var thisState = stateArray[i].nodeValue;
+		for(var i=0; i<dataArray.length; i++){
+			var thisState = dataArray[i].nodeValue;
 
 			if(thisState.toLowerCase().indexOf(str.toLowerCase()) == 0){
 				var tempDiv = document.createElement("div");
@@ -65,13 +74,19 @@ function searchStates(){
 
 		var foundState = document.getElementById('stateSuggest').childNodes.length;
 		if(foundState == 0){
-			document.getElementById('state').className = "error";
+			document.getElementById(elementId).className = "error";
 		}
 	}
 }
 
 function makeChoice(evt){
 	var thisDiv = (evt)? evt.target : window.event.srcElement;
-	document.getElementById('state').value = thisDiv.innerHTML;
+	document.getElementById(elementId).value = thisDiv.innerHTML;
+	dataArray = [];
 	document.getElementById('stateSuggest').innerHTML = "";
 }
+
+/*function dismissPopups(evt){
+	var thisbody = (evt)? evt.target : window.event.srcElement;
+	document.getElementById('stateSuggest').innerHTML = "";
+}*/
