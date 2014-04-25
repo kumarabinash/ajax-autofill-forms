@@ -1,6 +1,6 @@
 var xhr = false; //XMLHttpRequest Object
 var dataArray = new Array();
-var url = "local.xml"; //CHANGE THIS TO YOUR DESIRED XML FILE AND POPULATE THE XML FILE
+var url = "data/state.xml"; //CHANGE THIS TO YOUR DESIRED XML FILE AND POPULATE THE XML FILE
 var elementId;
 
 document.onclick = function(){
@@ -11,10 +11,10 @@ document.onclick = function(){
 function initAll(elid){
 	elementId = elid.id;
 	if(elementId == "state"){
-		url = elementId;		
+		url = "data/"+elementId;		
 	} else {
 		var state = document.getElementById('state').value.toLowerCase();
-		url = state + "-" + elementId;
+		url = "data/" + state + "-" + elementId;
 	}
 	if(window.XMLHttpRequest){  
 		xhr = new XMLHttpRequest();
